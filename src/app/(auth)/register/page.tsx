@@ -1,10 +1,11 @@
-import { GoogleSignIn } from '@/components/google-sign-in';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { signUp } from '@/lib/actions';
 import { auth } from '@/lib/auth';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import React from 'react'
+
 
 const page = async () => {
   const session = await auth();
@@ -31,12 +32,22 @@ const page = async () => {
         className="space-y-4"
         action={async (formData) => {
           "use server";
+          console.log(formData)
           const res = await signUp(formData);
           if (res.success) {
-            redirect("/sign-in");
+            redirect("/login");
           }
+          
         }}
       >
+        <Input
+          name="username"
+          placeholder="Username"
+          type="text"
+          required
+          autoComplete="username"
+        />
+
         <Input
           name="email"
           placeholder="Email"
@@ -58,7 +69,7 @@ const page = async () => {
 
       <div className="text-center">
         <Button asChild variant="link">
-          <Link href="/sign-in">Already have an account? Sign in</Link>
+          <Link href="/login">Already have an account? Sign in</Link>
         </Button>
       </div>
     </div>

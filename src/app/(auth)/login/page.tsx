@@ -1,4 +1,3 @@
-import { GoogleSignIn } from '@/components/google-sign-in';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { auth, signIn } from '@/lib/auth';
@@ -35,7 +34,11 @@ const page = async () => {
           "use server";
           await executeAction({
             actionFn: async () => {
-              await signIn("credentials", formData);
+              const res = await signIn("credentials",formData);
+              console.log(`res: ${res}`)
+              if (res?.success) {
+                   redirect("/dashboard");
+                 }
             },
           });
         }}
