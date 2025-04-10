@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from "next/navigation";
 import { Book } from '@/types/Book';
-import { set } from 'mongoose';
 import BookCard from '@/components/BookCard';
 
 const page = () => {
