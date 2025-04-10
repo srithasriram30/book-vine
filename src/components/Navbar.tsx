@@ -5,7 +5,6 @@ import { SignOut } from './sign-out';
 
 const Navbar = async () => {
     const session = await auth();
-    console.log(session)
   
   return (
     <nav>

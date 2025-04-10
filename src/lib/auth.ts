@@ -20,14 +20,12 @@ export const { signIn, signOut, auth, handlers  } = NextAuth({
         },
         authorize: async(credentials) => {
             const validateCredentials = loginSchema.safeParse(credentials);
-            console.log("validateCredentials", validateCredentials)
             const user = await db.user.findFirst({
                 where: {
                     email: credentials.email,
                 }
             })
 
-            console.log("user", user)
 
             if(!user){
                 throw new Error("Invalid credentials")

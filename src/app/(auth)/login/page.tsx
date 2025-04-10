@@ -35,7 +35,6 @@ const page = async () => {
           await executeAction({
             actionFn: async () => {
               const res = await signIn("credentials",formData);
-              console.log(`res: ${res}`)
               if (res?.success) {
                    redirect("/dashboard");
                  }

@@ -10,10 +10,11 @@ const page = async () => {
         redirect('/login')
     }
 
-    console.log(session)
 
   return (
-    <div>Dashboard</div>
+    <div className='px-4'>
+      <h1 className='text-4xl text-center'>Welcome, {session?.user?.username}</h1>
+    </div>
   )
 }
 
