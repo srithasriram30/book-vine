@@ -1,12 +1,12 @@
 User Management:
 
-  []  Sign up/login via email or Google.
+  [X]  Sign up/login via email.
 
   []  Profile management (name, avatar, reading preferences).
 
 Book Tracking:
 
-  []  Search books via Open Library API.
+  [X]  Search books via Open Library API.
 
   [] Add books to custom shelves (e.g., "Read," "Reading," "Want to Read").
 

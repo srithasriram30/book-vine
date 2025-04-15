@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from "next/navigation";
 import { Book } from '@/types/Book';
-import BookCard from '@/components/BookCard';
+import BookCard from '@/components/book/BookCard';
 
 const page = () => {
     const router = useRouter();

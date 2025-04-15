@@ -80,3 +80,53 @@ model Authenticator {
  
   @@id([userId, credentialID])
 }
+
+model Shelf {
+    id           String   @id @default(uuid())
+    name         String
+    description  String?
+    userId       String
+    books        Book[]
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @updatedAt
+}
+
+model Book {
+    id           String   @id @default(uuid())
+    isbn         String
+    title        String
+    author       String
+    description  String?
+    coverImage   String?
+    status       BookStatus @default(TO_READ)
+    shelfId      String
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @updatedAt
+    shelfType   ShelfType @default(PUBLIC)
+
+    shelf Shelf @relation(fields: [shelfId], references: [id], onDelete: Cascade)
+}
+
+model Review {
+   id           String   @id @default(uuid())
+   userId       String
+   bookIsbn     String
+   rating       Int
+   review       String?
+   createdAt    DateTime @default(now())
+   updatedAt    DateTime @updatedAt
+}
+
+enum BookStatus {
+    TO_READ
+    READING
+    READ
+    DNF
+    ON_HOLD
+}
+
+enum ShelfType {
+    PUBLIC
+    FRIENDS_ONLY
+    PRIVATE
+}
