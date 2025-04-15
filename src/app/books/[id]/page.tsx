@@ -8,6 +8,7 @@ import { getAuthorName, getBookDetails } from '@/hooks/book';
 import { getAuthorId } from '@/lib/utils';
 import { reviews } from '@/lib/data';
 import ReviewCard from '@/components/review/ReviewCard';
+import StartReading from '@/components/book/StartReading';
 
 const Page = () => {
 
@@ -97,7 +98,7 @@ const Page = () => {
       ) : (loggedIn && 
       <div>
       <AddToShelf />
-      <p>Start Reading</p>
+      <StartReading />
       </div>)
     }
                 </div>

@@ -5,7 +5,7 @@ const AddToShelf = () => {
   return (
     <div>
       <Button className='border-2 border-gray-800 hover:bg-green-300'>
-        Add to Shelf
+        Start Reading
       </Button>
     </div>
   )
