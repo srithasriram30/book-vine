@@ -1,6 +1,7 @@
 'use client'
+import { getUsername } from '@/app/api/users/route'
 import { Review } from '@/types/Review'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 interface ReviewCardProps {
   review: Review
@@ -8,12 +9,24 @@ interface ReviewCardProps {
 
 const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
 
+  const [username, setUsername] = React.useState<string>('')
 
+  useEffect(() => { 
+    const fetchUsername = async () => {
+      const { success, username } = await getUsername(review.userId)
+      if (success && username) {
+        setUsername(username)
+      }
+    }
 
+    fetchUsername()
+  }, [])
+
+  console.log("ReviewCard username:", username)
   return (
     <div className='flex flex-row items-center my-5 gap-5 p-4 border rounded-lg shadow-sm'>
       <div className='flex-shrink-0'>
-        <p className='font-medium'></p>
+        <p className='font-medium'>{username}</p>
       </div>
       <div className='flex-grow'>
         <div className='flex items-center mb-2'>
