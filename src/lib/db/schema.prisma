@@ -89,11 +89,13 @@ model Shelf {
     books        Book[]
     createdAt    DateTime @default(now())
     updatedAt    DateTime @updatedAt
+    shelfType   ShelfType @default(PUBLIC)
+
 }
 
 model Book {
     id           String   @id @default(uuid())
-    isbn         String
+    bookId       String
     title        String
     author       String
     description  String?
@@ -102,15 +104,14 @@ model Book {
     shelfId      String
     createdAt    DateTime @default(now())
     updatedAt    DateTime @updatedAt
-    shelfType   ShelfType @default(PUBLIC)
 
     shelf Shelf @relation(fields: [shelfId], references: [id], onDelete: Cascade)
 }
 
 model Review {
    id           String   @id @default(uuid())
-   userId       String
-   bookIsbn     String
+   userEmail    String
+   bookId       String
    rating       Int
    review       String?
    createdAt    DateTime @default(now())

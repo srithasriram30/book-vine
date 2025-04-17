@@ -30,7 +30,7 @@ export const addReview = async (review: Review) => {
         const newReview = await db.review.create({
             data: {
                 bookId: review.bookId,
-                userId: review.userId,
+                userEmail: review.userEmail,
                 rating: review.rating,
                 review: review.review,
                 createdAt: new Date(),
@@ -56,7 +56,7 @@ export const editReview = async (review: Review) => {
             },
             data: {
                 bookId: review.bookId,
-                userId: review.userId,
+                userEmail: review.userEmail,
                 rating: review.rating,
                 review: review.review,
                 updatedAt: new Date()
@@ -74,12 +74,12 @@ export const editReview = async (review: Review) => {
     }
 }
 
-export const getReviewByUserId = async (userId:string) => {
+export const getReviewByUserEmail = async (userEmail:string) => {
     // This is used to get the latest reviews of a user for the dahboard
     try {
         const reviews = await db.review.findMany({
             where: {
-                userId: userId
+                userEmail: userEmail
             }, 
             orderBy: {
                 createdAt: 'desc'

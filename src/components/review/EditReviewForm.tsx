@@ -2,7 +2,9 @@ import React from 'react'
 
 const EditReviewForm = () => {
   return (
-    <div>EditReviewForm</div>
+    <div>
+      <h1>Edit Review</h1>
+    </div>
   )
 }
 
