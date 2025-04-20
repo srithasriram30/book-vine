@@ -50,9 +50,10 @@ export const addReview = async (review: Review) => {
 
 export const editReview = async (review: Review) => {
     try {
+        console.log(review)
         const editReview = await db.review.update({
             where: {
-                id: review.id
+                id: review.id,
             },
             data: {
                 bookId: review.bookId,
@@ -63,14 +64,16 @@ export const editReview = async (review: Review) => {
             }
         });
 
+        console.log(editReview)
+
         if(!editReview) {
-            return {error: 'Error adding review', success: false} 
+            return {error: 'Error editing review', success: false} 
         }
 
         return {error: null, success: true, review: editReview}
     } catch (error) {
-        console.error("Error adding review:", error);
-        return {error: 'Error adding review', success: false} 
+        console.error("Error editing review:", error);
+        return {error: 'Error editing review', success: false} 
     }
 }
 
