@@ -101,7 +101,7 @@ export const getReviewByUserEmail = async (userEmail:string) => {
     }
 }
 
-export const deleteReview = async (reviewId: string) => {
+export const deleteReviewById = async (reviewId: string) => {
     try {
         const deletedReview = await db.review.delete({
             where: {
@@ -116,5 +116,27 @@ export const deleteReview = async (reviewId: string) => {
     } catch (error) {
         console.log("Error deleting review:", error);
         return {error: 'Error deleting review', success: false}
+    }
+}
+
+export const getReviewById = async (reviewId:string) => {
+    try {
+        const review = await db.review.findUnique({
+            where: {
+                id: reviewId
+            }
+        })
+
+        if(!review){
+            console.error("Error fetching review:", error);
+            return {error: 'Error fetching review', success: false, reviews: null} 
+    
+        }
+
+        return {error: '', success: true, review: review}
+    } catch (error) {
+        console.error("Error fetching review:", error);
+        return {error: 'Error fetching review', success: false, reviews: null} 
+
     }
 }

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { redirect, useParams } from "next/navigation";
 import { useSession } from "next-auth/react"
 import { Input } from '@/components/ui/input';
-import { addReview } from '@/app/api/review/route';
+import {  addReview } from '@/app/api/review/route';
 import { Review } from '@/types/Review';
 
 const Page = () => {
