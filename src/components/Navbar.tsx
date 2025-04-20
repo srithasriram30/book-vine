@@ -2,6 +2,7 @@ import { auth } from '@/lib/auth';
 import Link from 'next/link'
 import React from 'react'
 import { SignOut } from './sign-out';
+import { FaUser } from "react-icons/fa6";
 
 const Navbar = async () => {
     const session = await auth();
@@ -18,6 +19,7 @@ const Navbar = async () => {
               </>
             ) : (
               <>
+                <FaUser />
                 <Link href='/dashboard'>Dashboard</Link>
                 <SignOut />
               </>
