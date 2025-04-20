@@ -1,8 +1,9 @@
 'use client'
-import { getReviewById } from '@/app/api/review/route';
+import { editReview, getReviewById } from '@/app/api/review/route';
 import { Input } from '@/components/ui/input';
 import { Review } from '@/types/Review';
-import { useParams } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import { redirect, useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
 const page = () => {
@@ -13,25 +14,30 @@ const page = () => {
   const params = useParams<{ tag: string; item: string }>()
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
-    
-        const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+   const { data: session } = useSession();
+  const email = session?.user?.email;
+
+
+        const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault();
           setIsSubmitting(true);
         setError('');
         setSuccess(false);
 
+
         const formData = new FormData(e.currentTarget);
         const rating = formData.get('rating');
         const reviewText = formData.get('review');
         const reviewData: Review = {
+                    id: params.reviewId,
                     bookId: params.id,
                     userEmail: email,
                     rating: parseInt(rating),
                     review: reviewText
         }
                     try {
-                      const response = await addReview(reviewData)
-                                  console.log(response)
+                      const response = await editReview(reviewData)
+                      console.log(response)
                       
                                   if(response.success){
                                       setSuccess(true);
@@ -40,12 +46,17 @@ const page = () => {
                                       setSuccess(false)
                                   }
                     } catch (error) {
-                      
+                      console.log(`error adding review: ${error}`)
+                      setSuccess(false)
+                      setIsLoading(false)
+                    } finally {
+                      redirect(`/books/${params.id}`)
                     }
         
                 
           
         }
+
   useEffect(() => {
     const getReview = async() => {
     try {
