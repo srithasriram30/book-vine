@@ -41,12 +41,17 @@ export const { signIn, signOut, auth, handlers  } = NextAuth({
     })
 ], 
 callbacks: {
-    async jwt({ token, account }) {
+    async jwt({ token,user, account }) {
       if (account?.provider === "credentials") {
         token.credentials = true;
       }
+      if (user) {
+        token.id = user.id;
+      }
+
       return token;
     },
+    
   },
   jwt: {
     encode: async function (params) {

@@ -1,5 +1,7 @@
+//TODO: switch to axios
+
 export const getBookDetails = async (id: string) => {
-    const res = await fetch(`https://openlibrary.org/works/${id}.json`)
+    const res = await fetch(`https://openlibrary.org/works/${id}.json`, { cache: "no-store" })
     if(!res.ok){
         return {book: [], error: 'Failed to fetch book details', success:false}
     }
