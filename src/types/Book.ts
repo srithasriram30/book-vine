@@ -9,6 +9,9 @@ export interface Book {
     publishedYear?: number,
     genres?: string[],
     description?: string,
+    status?: string,
+    reviews?: string[],
+    
 }
 
 export type BookPreview = Pick<Book, "_id" | "olid" | "title" | "author" | "coverUrl">;
